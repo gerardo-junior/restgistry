@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: restgistrydb
+    environment:
+      MYSQL_DATABASE: 'restgistry'
+      MYSQL_USER: 'restgistry-user'
+      MYSQL_PASSWORD: 'restgistry123'
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    volumes:
+      - db-data:/var/lib/mysql
+  
+  nodejs:
+    image: gerardojunior/nodejs:stable
+    restart: on-failure
+    container_name: restgistry
+    volumes:
+      - .:/src
+    # ports:
+      # - 3000:3000
+    links:
+      - db
+    depends_on:
+      - db
+
+
+volumes:
+  db-data:
+    name: 'restgistry-db'
