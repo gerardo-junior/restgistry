@@ -65,9 +65,8 @@ module.exports = app => {
 
   /**
    * Delete all Users
-   * @route DELETE /users/{cpf}
+   * @route DELETE /users
    * @group Operations about user
-   * @param {string} cpf.path.required
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
