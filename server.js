@@ -14,6 +14,14 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(function (error, req, res, next) {
+	if (error instanceof SyntaxError) {
+		res.status(400).send('{"error":"Error parsing data"}')
+	} else {
+		next();
+	}
+});
+
 const db = require("./src/models");
 
 // create table if not exists
