@@ -40,7 +40,7 @@ docker-compose up # the first time, it will download the images
 
 To access the api:
 
-Wait for message and open [localhost:8080](http://localhost:8080) in your browser
+Wait for message and open [localhost:8080](http://localhost:8080) in your browser to go to /api-doc
 
 To use a cli:
 ```bash
