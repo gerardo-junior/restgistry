@@ -47,8 +47,6 @@ To use a cli:
 docker-compose exec restgistry node
 ```
 
-** For more information about the api container read the [README](http://github.com/gerardo-junior/TAP.api.environment) of api.environment
-
 #### How can i use the cli?
 
 ```bash
