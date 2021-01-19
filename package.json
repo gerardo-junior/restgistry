@@ -2,9 +2,10 @@
   "name": "restgistry",
   "version": "0.0.1",
   "description": "registry over api example",
-  "main": "entrypoint.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Test not fount yet!\""
+    "test": "echo \"Test not fount yet!\"",
+    "postinstall": "cp -n .env.example .env"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,20 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gerardo-junior/restgistry/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mgr-swagger-express": "0.0.6",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0",
+    "sequelize-mysql-set-timezone-fix": "^3.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
   },
   "homepage": "https://github.com/gerardo-junior/restgistry#readme"
 }
