@@ -4,7 +4,7 @@ const db = require("../models")
 ,     Validator = require('validatorjs');
 
 // Create and Save a new User
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   
   let data = req.body
   
@@ -24,10 +24,20 @@ exports.create = (req, res) => {
     return;
   }
 
-  //zipcode serach
+  // check if exists zipcode on database
+  if (await User.count({ where: [{ 'address.zipcode' : data.zipcode }]})) {
+    res.status(400).send('{"error": "Address already registered with another user"}');
+    return;    
+  }
+  
+  // zipcode serach
+  data.address = require('../services/ziprest').resolver(data.zipcode)
 
-  data.address = { zipcode: data.zipcode }
-
+  if (!data.address) {
+    res.status(400).send('{"error": "zipcode not found"}');
+    return;
+  }
+  
   delete data.zipcode
 
   // Save User in the database
@@ -77,9 +87,23 @@ exports.findOne = (req, res) => {
 
 // Update a User by the cpf in the request
 exports.update = (req, res) => {
-  const cpf = req.params.cpf;
+  
+  let cpf = req.params.cpf
+  ,   data = req.body
+  
+  let rules = {
+    email: 'email',
+  };
+  
+  let validation = new Validator(data, rules);
+  
+  // Validate request
+  if (!validation.passes() || cpf === '') {
+    res.status(400).send(validation.errors);
+    return;
+  }
 
-  User.update(req.body, {
+  User.update(data, {
     where: { cpf: cpf }
   })
     .then(num => {
