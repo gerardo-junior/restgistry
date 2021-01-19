@@ -31,7 +31,9 @@ exports.create = async (req, res) => {
   }
   
   // zipcode serach
-  data.address = require('../services/ziprest').resolver(data.zipcode)
+  data.address = await require('../services/ziprest').resolver(data.zipcode)
+
+  console.log(data.address)
 
   if (!data.address) {
     res.status(400).send('{"error": "zipcode not found"}');

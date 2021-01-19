@@ -25,12 +25,12 @@ app.use(function (error, req, res, next) {
 const db = require("./src/models");
 
 // create table if not exists
-// db.sequelize.sync();
+db.sequelize.sync();
 
 // drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 // Redirect to api docs
 app.get("/", (req, res) => res.redirect('/api-docs'));
