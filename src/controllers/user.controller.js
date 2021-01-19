@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     name: 'required',
     email: 'required|email',
     cpf: 'min:11|max:11',
-    description: 'required',
+    job: 'required',
     zipcode: 'required'
   };
   
@@ -77,10 +77,10 @@ exports.findOne = (req, res) => {
 
 // Update a User by the id in the request
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const cpf = req.params.cpf;
 
   User.update(req.body, {
-    where: { id: id }
+    where: { cpf: cpf }
   })
     .then(num => {
       if (num == 1) {
@@ -89,23 +89,23 @@ exports.update = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`
+          message: `Cannot update User with cpf=${cpf}. Maybe User was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating User with id=" + id
+        message: "Error updating User with cpf=" + cpf
       });
     });
 };
 
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.cpf;
 
   User.destroy({
-    where: { id: id }
+    where: { cpf: cpf }
   })
     .then(num => {
       if (num == 1) {
@@ -114,13 +114,13 @@ exports.delete = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot delete User with id=${id}. Maybe User was not found!`
+          message: `Cannot delete User with cpf=${cpf}. Maybe User was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete User with id=" + id
+        message: "Could not delete User with cpf=" + cpf
       });
     });
 };
@@ -142,9 +142,9 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-// find all published User
+// find all public User
 exports.findAllPublic = (req, res) => {
-  User.findAll({ where: { published: true } })
+  User.findAll({ where: { public: true } })
     .then(data => {
       res.send(data);
     })

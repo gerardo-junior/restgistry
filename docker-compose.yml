@@ -16,6 +16,7 @@ services:
     image: gerardojunior/nodejs:stable
     restart: on-failure
     container_name: restgistry
+    command: npm run start
     env_file:
       - .env
     volumes:

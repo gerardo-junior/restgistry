@@ -10,7 +10,10 @@ module.exports = {
         basePath: '/api',
         produces: [
             "application/json"
-        ]
+        ],
+        consumes : [
+            "application/json"
+        ],
     },
     basedir: './', //app absolute path
     files: ['./src/routes/**/*.js'] //Path to the API handle folder

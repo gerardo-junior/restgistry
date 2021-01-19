@@ -16,13 +16,19 @@ module.exports = app => {
    * Create a new User
    * @route POST /users
    * @group Operations about user
+   * @param {string} name.json.required - name
+   * @param {string} email.json.required - email
+   * @param {string} cpf.json.required - cpf
+   * @param {string} zipcode.json.required - zipcode
+   * @param {string} job.json - job
    * @returns {object} 200 - User created with success
+   * @returns {Error} 400 - Error: fail validate
    * @returns {Error}  default - Unexpected error
    */
   router.post("/", users.create);
 
   /**
-   * Retrieve all public Users
+   * Retrieve only public Users
    * @route GET /users/public
    * @group Operations about user
    * @returns {object} 200 - An array of user info
@@ -43,10 +49,15 @@ module.exports = app => {
    * Update a User with cpf
    * @route PUT /users/$cpf
    * @group Operations about user
+   * @param {string} name.json - name
+   * @param {string} email.json - email
+   * @param {string} zipcode.json - zipcode
+   * @param {string} job.json - job
+   * @param {string} public.json - public
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
-  router.put("/:id", users.update);
+  router.put("/:cpf", users.update);
 
   /**
    * Delete a User with id
@@ -55,7 +66,7 @@ module.exports = app => {
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
-  router.delete("/:id", users.delete);
+  router.delete("/:cpf", users.delete);
 
   /**
    * Delete all Users

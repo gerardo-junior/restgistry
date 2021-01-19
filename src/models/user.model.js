@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     name: {
       type: Sequelize.STRING
     },
-    description: {
+    job: {
       type: Sequelize.STRING
     },
     email: {
@@ -18,8 +18,9 @@ module.exports = (sequelize, Sequelize) => {
     address: {
       type: Sequelize.JSON
     },
-    published: {
-      type: Sequelize.BOOLEAN
+    public: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
     }
   });
 
