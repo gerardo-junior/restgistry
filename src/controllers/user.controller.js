@@ -60,22 +60,22 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single User with an id
+// Find a single User with an cpf
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const cpf = req.params.cpf;
 
-  User.findByPk(id)
+  User.findByPk(cpf)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving User with id=" + id
+        message: "Error retrieving User with cpf=" + cpf
       });
     });
 };
 
-// Update a User by the id in the request
+// Update a User by the cpf in the request
 exports.update = (req, res) => {
   const cpf = req.params.cpf;
 
@@ -100,9 +100,9 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a User with the specified id in the request
+// Delete a User with the specified cpf in the request
 exports.delete = (req, res) => {
-  const id = req.params.cpf;
+  const cpf = req.params.cpf;
 
   User.destroy({
     where: { cpf: cpf }

@@ -16,11 +16,7 @@ module.exports = app => {
    * Create a new User
    * @route POST /users
    * @group Operations about user
-   * @param {string} name.json.required - name
-   * @param {string} email.json.required - email
-   * @param {string} cpf.json.required - cpf
-   * @param {string} zipcode.json.required - zipcode
-   * @param {string} job.json - job
+   * @param {string} body.body.required - User data - eg: {"name": "John Frum", "zipcode": "06760030", "job": "hunter", "email": "me@john-frum.com", "cpf":"62414514213"}
    * @returns {object} 200 - User created with success
    * @returns {Error} 400 - Error: fail validate
    * @returns {Error}  default - Unexpected error
@@ -38,8 +34,9 @@ module.exports = app => {
 
   /**
    * Retrieve a single User with cpf
-   * @route GET /users/$cpf
+   * @route GET /users/{cpf}
    * @group Operations about user
+   * @param {string} cpf.path.required
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
@@ -47,13 +44,10 @@ module.exports = app => {
 
   /**
    * Update a User with cpf
-   * @route PUT /users/$cpf
+   * @route PUT /users/{cpf}
    * @group Operations about user
-   * @param {string} name.json - name
-   * @param {string} email.json - email
-   * @param {string} zipcode.json - zipcode
-   * @param {string} job.json - job
-   * @param {string} public.json - public
+   * @param {string} cpf.path.required
+   * @param {string} body.body.required - User data - eg: {"name": "John Frum", "zipcode": "06760030", "job": "hunter", "email": "me@john-frum.com", "public": true}
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
@@ -61,8 +55,9 @@ module.exports = app => {
 
   /**
    * Delete a User with id
-   * @route DELETE /users/$cpf
+   * @route DELETE /users/{cpf}
    * @group Operations about user
+   * @param {string} cpf.path.required
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
@@ -70,8 +65,9 @@ module.exports = app => {
 
   /**
    * Delete all Users
-   * @route DELETE /users/$cpf
+   * @route DELETE /users/{cpf}
    * @group Operations about user
+   * @param {string} cpf.path.required
    * @returns {object} 200 - An array of user info
    * @returns {Error}  default - Unexpected error
    */
