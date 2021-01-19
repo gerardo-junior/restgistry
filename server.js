@@ -6,11 +6,7 @@ const express = require("express")
 
 expressSwagger(require('./src/config/swagger.config'))
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -20,16 +16,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./src/models");
 
+// create table if not exists
 // db.sequelize.sync();
-// // drop the table if it already exists
+
+// drop the table if it already exists
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
 
 // Redirect to api docs
-app.get("/", (req, res) => {
-  res.redirect('/api-docs');
-});
+app.get("/", (req, res) => res.redirect('/api-docs'));
 
 require("./src/routes/user.routes")(app);
 
